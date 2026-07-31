@@ -39,13 +39,3 @@ info_rows = [
     for k, v in FEATURE_INFO.items()
 ]
 st.dataframe(info_rows, hide_index=True, width="stretch")
-
-st.subheader("Explore the app")
-st.markdown(
-    """
-Use the sidebar to navigate:
-
-1. **Explore Data**: correlations, distributions, and trends across regions and years.
-2. **Predict PoU**: pick a region/year and adjust indicators to see the model's estimate.
-"""
-)

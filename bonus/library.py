@@ -33,6 +33,44 @@ FEATURE_INFO = {
     "ANM": ("Anemia in women", "%", "Women 15-49 with anemia (low hemoglobin)."),
 }
 
+# ISO-3 country codes for each region actually present in the data, so every constituent country can be shaded.
+# Only the most granular subregion for each area is kept -- e.g. "Asia" is dropped in favor of its subregions
+# (Central/Southern/South-eastern/Western Asia), which already cover it in more detail.
+REGION_COUNTRIES = {
+    "Northern America": ["BMU", "CAN", "GRL", "USA"],
+    "Caribbean": [
+        "ATG", "BHS", "BRB", "CUB", "DMA", "DOM", "GRD", "HTI", "JAM", "PRI", "KNA", "LCA", "VCT", "TTO",
+    ],
+    "Central America": ["BLZ", "CRI", "SLV", "GTM", "HND", "MEX", "NIC", "PAN"],
+    "South America": ["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "GUY", "PRY", "PER", "SUR", "URY", "VEN"],
+    "Central Asia": ["KAZ", "KGZ", "TJK", "TKM", "UZB"],
+    "Southern Asia": ["AFG", "BGD", "BTN", "IND", "IRN", "MDV", "NPL", "PAK", "LKA"],
+    "South-eastern Asia": ["BRN", "KHM", "IDN", "LAO", "MYS", "MMR", "PHL", "SGP", "THA", "TLS", "VNM"],
+    "Western Asia": [
+        "ARM", "AZE", "BHR", "CYP", "GEO", "IRQ", "ISR", "JOR", "KWT", "LBN", "OMN", "PSE", "QAT", "SAU",
+        "SYR", "TUR", "ARE", "YEM",
+    ],
+    "Eastern Africa": [
+        "BDI", "COM", "DJI", "ERI", "ETH", "KEN", "MDG", "MWI", "MUS", "MOZ", "RWA", "SYC", "SOM", "SSD",
+        "UGA", "TZA", "ZMB", "ZWE",
+    ],
+    "Middle Africa": ["AGO", "CMR", "CAF", "TCD", "COG", "COD", "GNQ", "GAB", "STP"],
+    "Northern Africa": ["DZA", "EGY", "LBY", "MAR", "SDN", "TUN"],
+    "Southern Africa": ["BWA", "SWZ", "LSO", "NAM", "ZAF"],
+    "Western Africa": [
+        "BEN", "BFA", "CPV", "CIV", "GMB", "GHA", "GIN", "GNB", "LBR", "MLI", "MRT", "NER", "NGA", "SEN",
+        "SLE", "TGO",
+    ],
+    "Eastern Europe": ["BLR", "BGR", "CZE", "HUN", "POL", "MDA", "ROU", "RUS", "SVK", "UKR"],
+    "Northern Europe": ["DNK", "EST", "FIN", "ISL", "IRL", "LVA", "LTU", "NOR", "SWE", "GBR"],
+    "Southern Europe": [
+        "ALB", "AND", "BIH", "HRV", "GRC", "ITA", "MLT", "MNE", "MKD", "PRT", "SRB", "SVN", "ESP",
+    ],
+    "Western Europe": ["AUT", "BEL", "FRA", "DEU", "LUX", "NLD", "CHE"],
+    "Australia and New Zealand": ["AUS", "NZL"],
+    "Polynesia": ["ASM", "COK", "PYF", "NIU", "WSM", "TKL", "TON", "TUV"],
+}
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Data Loading

@@ -2,13 +2,41 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 
-from library import FEATURE_INFO, TARGET, AREA_CODE, YEAR, load_data
+from library import FEATURE_INFO, REGION_COUNTRIES, TARGET, AREA_CODE, YEAR, load_data
 
 st.set_page_config(page_title="Food Security | Explore Data", page_icon="\U0001F4CA", layout="wide")
 st.title("\U0001F4CA Explore the Data")
 
 df = load_data()
 regions = sorted(df["Country"].unique())
+
+# --- PoU Map ----------------------------------------------------------------------------------------------------------
+st.subheader("PoU Map")
+st.markdown("PoU across regions of the world over time.")
+
+geo_df = df[df["Country"].isin(REGION_COUNTRIES)].copy()
+geo_df["iso3"] = geo_df["Country"].map(REGION_COUNTRIES)
+geo_df = geo_df.explode("iso3")
+
+fig_map = px.choropleth(
+    geo_df,
+    locations="iso3",
+    locationmode="ISO-3",
+    color=TARGET,
+    hover_name="Country",
+    animation_frame=YEAR,
+    color_continuous_scale="YlOrRd",
+    range_color=[0, float(df[TARGET].max())],
+    projection="natural earth",
+    labels={TARGET: "PoU (%)"},
+)
+fig_map.update_layout(
+    height=600,
+    margin=dict(l=0, r=0, t=30, b=0),
+    coloraxis_colorbar_title="PoU (%)",
+)
+fig_map.update_geos(showcountries=True, countrycolor="#DDDDDD", showland=True, landcolor="#F7F7F5")
+st.plotly_chart(fig_map, width="stretch")
 
 # --- PoU Trend --------------------------------------------------------------------------------------------------------
 st.subheader("PoU Trend")
