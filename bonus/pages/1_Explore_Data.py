@@ -2,19 +2,20 @@ import numpy as np
 import plotly.express as px
 import streamlit as st
 
-from library import FEATURE_INFO, REGION_COUNTRIES, TARGET, AREA_CODE, YEAR, load_data
+from library import FEATURE_INFO, REGION_COUNTRIES, TARGET, AREA_CODE, YEAR, load_data, load_pou_data
 
 st.set_page_config(page_title="Food Security | Explore Data", page_icon="\U0001F4CA", layout="wide")
 st.title("\U0001F4CA Explore the Data")
 
 df = load_data()
-regions = sorted(df["Country"].unique())
+full_df = load_pou_data()
+regions = sorted(full_df["Country"].unique())
 
 # --- PoU Map ----------------------------------------------------------------------------------------------------------
 st.subheader("PoU Map")
 st.markdown("PoU across regions of the world over time.")
 
-geo_df = df[df["Country"].isin(REGION_COUNTRIES)].copy()
+geo_df = full_df[full_df["Country"].isin(REGION_COUNTRIES)].copy()
 geo_df["iso3"] = geo_df["Country"].map(REGION_COUNTRIES)
 geo_df = geo_df.explode("iso3")
 
@@ -26,7 +27,7 @@ fig_map = px.choropleth(
     hover_name="Country",
     animation_frame=YEAR,
     color_continuous_scale="YlOrRd",
-    range_color=[0, float(df[TARGET].max())],
+    range_color=[0, float(full_df[TARGET].max())],
     projection="natural earth",
     labels={TARGET: "PoU (%)"},
 )
@@ -51,7 +52,7 @@ selected_regions = st.multiselect("Regions", regions, default=[
     # "Oceania",
     "World"
 ])
-trend_df = df[df["Country"].isin(selected_regions)]
+trend_df = full_df[full_df["Country"].isin(selected_regions)]
 st.caption(f"{len(trend_df)} observations selected.")
 
 fig_trend = px.line(

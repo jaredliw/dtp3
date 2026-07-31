@@ -1,7 +1,7 @@
 """Shared data loading, preprocessing, and model definitions for the PoU Streamlit app.
 
 Ports the custom StandardScaler, LinearRegression, and MLP classes built in ``model.ipynb``. The models themselves
-are trained in the notebook and pickled to ``data/models.pkl`` — this module only reconstructs and runs them.
+are trained in the notebook and pickled to ``data/models.pkl``.
 """
 from __future__ import annotations
 
@@ -14,6 +14,7 @@ import streamlit as st
 
 DATA_DIR = Path(__file__).parent / "data"
 CLEANED_CSV = DATA_DIR / "data.csv"
+FULL_CSV = DATA_DIR / "data_pou.csv"
 AREA_CODES_CSV = DATA_DIR / "area_codes.csv"
 MODELS_PKL = DATA_DIR / "models.pkl"
 
@@ -33,9 +34,6 @@ FEATURE_INFO = {
     "ANM": ("Anemia in women", "%", "Women 15-49 with anemia (low hemoglobin)."),
 }
 
-# ISO-3 country codes for each region actually present in the data, so every constituent country can be shaded.
-# Only the most granular subregion for each area is kept -- e.g. "Asia" is dropped in favor of its subregions
-# (Central/Southern/South-eastern/Western Asia), which already cover it in more detail.
 REGION_COUNTRIES = {
     "Northern America": ["BMU", "CAN", "GRL", "USA"],
     "Caribbean": [
@@ -85,6 +83,18 @@ def load_data() -> pd.DataFrame:
     df = df.merge(area_codes, on=AREA_CODE, how="left")
     df = df[[AREA_CODE, YEAR, *INDICATORS, TARGET, "Country"]].copy()
     df[[AREA_CODE, YEAR, *INDICATORS, TARGET]] = df[[AREA_CODE, YEAR, *INDICATORS, TARGET]].astype(np.float64)
+    df[AREA_CODE] = df[AREA_CODE].astype(int)
+    df[YEAR] = df[YEAR].astype(int)
+    return df.sort_values(["Country", YEAR]).reset_index(drop=True)
+
+
+@st.cache_data
+def load_pou_data() -> pd.DataFrame:
+    df = pd.read_csv(FULL_CSV)
+    area_codes = pd.read_csv(AREA_CODES_CSV)[["Area Code", "Area"]].rename(
+        columns={"Area Code": AREA_CODE, "Area": "Country"}
+    )
+    df = df.merge(area_codes, on=AREA_CODE, how="left")
     df[AREA_CODE] = df[AREA_CODE].astype(int)
     df[YEAR] = df[YEAR].astype(int)
     return df.sort_values(["Country", YEAR]).reset_index(drop=True)
