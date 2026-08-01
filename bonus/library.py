@@ -35,13 +35,18 @@ FEATURE_INFO = {
 }
 
 REGION_COUNTRIES = {
-    "Northern America": ["BMU", "CAN", "GRL", "USA"],
+    "Northern America": ["BMU", "CAN", "GRL", "SPM", "USA"],
     "Caribbean": [
-        "ATG", "BHS", "BRB", "CUB", "DMA", "DOM", "GRD", "HTI", "JAM", "PRI", "KNA", "LCA", "VCT", "TTO",
+        "ABW", "AIA", "ATG", "BES", "BHS", "BLM", "BRB", "CUB", "CUW", "CYM", "DMA", "DOM", "GLP", "GRD",
+        "HTI", "JAM", "MAF", "MSR", "MTQ", "PRI", "KNA", "LCA", "SXM", "TCA", "TTO", "VCT", "VGB", "VIR",
     ],
     "Central America": ["BLZ", "CRI", "SLV", "GTM", "HND", "MEX", "NIC", "PAN"],
-    "South America": ["ARG", "BOL", "BRA", "CHL", "COL", "ECU", "GUY", "PRY", "PER", "SUR", "URY", "VEN"],
+    "South America": [
+        "ARG", "BOL", "BRA", "BVT", "CHL", "COL", "ECU", "FLK", "GUF", "GUY", "PRY", "PER", "SGS", "SUR",
+        "URY", "VEN",
+    ],
     "Central Asia": ["KAZ", "KGZ", "TJK", "TKM", "UZB"],
+    "Eastern Asia": ["CHN", "HKG", "MAC", "TWN", "PRK", "JPN", "MNG", "KOR"],
     "Southern Asia": ["AFG", "BGD", "BTN", "IND", "IRN", "MDV", "NPL", "PAK", "LKA"],
     "South-eastern Asia": ["BRN", "KHM", "IDN", "LAO", "MYS", "MMR", "PHL", "SGP", "THA", "TLS", "VNM"],
     "Western Asia": [
@@ -49,24 +54,30 @@ REGION_COUNTRIES = {
         "SYR", "TUR", "ARE", "YEM",
     ],
     "Eastern Africa": [
-        "BDI", "COM", "DJI", "ERI", "ETH", "KEN", "MDG", "MWI", "MUS", "MOZ", "RWA", "SYC", "SOM", "SSD",
-        "UGA", "TZA", "ZMB", "ZWE",
+        "ATF", "BDI", "COM", "DJI", "ERI", "ETH", "IOT", "KEN", "MDG", "MWI", "MUS", "MOZ", "MYT", "REU",
+        "RWA", "SYC", "SOM", "SSD", "UGA", "TZA", "ZMB", "ZWE",
     ],
     "Middle Africa": ["AGO", "CMR", "CAF", "TCD", "COG", "COD", "GNQ", "GAB", "STP"],
-    "Northern Africa": ["DZA", "EGY", "LBY", "MAR", "SDN", "TUN"],
+    "Northern Africa": ["DZA", "EGY", "ESH", "LBY", "MAR", "SDN", "TUN"],
     "Southern Africa": ["BWA", "SWZ", "LSO", "NAM", "ZAF"],
     "Western Africa": [
         "BEN", "BFA", "CPV", "CIV", "GMB", "GHA", "GIN", "GNB", "LBR", "MLI", "MRT", "NER", "NGA", "SEN",
-        "SLE", "TGO",
+        "SHN", "SLE", "TGO",
     ],
     "Eastern Europe": ["BLR", "BGR", "CZE", "HUN", "POL", "MDA", "ROU", "RUS", "SVK", "UKR"],
-    "Northern Europe": ["DNK", "EST", "FIN", "ISL", "IRL", "LVA", "LTU", "NOR", "SWE", "GBR"],
-    "Southern Europe": [
-        "ALB", "AND", "BIH", "HRV", "GRC", "ITA", "MLT", "MNE", "MKD", "PRT", "SRB", "SVN", "ESP",
+    "Northern Europe": [
+        "ALA", "DNK", "EST", "FIN", "FRO", "GGY", "ISL", "IMN", "IRL", "JEY", "LVA", "LTU", "NOR", "SJM",
+        "SWE", "GBR",
     ],
-    "Western Europe": ["AUT", "BEL", "FRA", "DEU", "LUX", "NLD", "CHE"],
-    "Australia and New Zealand": ["AUS", "NZL"],
-    "Polynesia": ["ASM", "COK", "PYF", "NIU", "WSM", "TKL", "TON", "TUV"],
+    "Southern Europe": [
+        "ALB", "AND", "BIH", "HRV", "GIB", "GRC", "ITA", "MLT", "MNE", "MKD", "PRT", "SMR", "SRB", "SVN",
+        "ESP", "VAT",
+    ],
+    "Western Europe": ["AUT", "BEL", "FRA", "DEU", "LIE", "LUX", "MCO", "NLD", "CHE"],
+    "Australia and New Zealand": ["AUS", "CCK", "CXR", "HMD", "NFK", "NZL"],
+    "Melanesia": ["FJI", "NCL", "PNG", "SLB", "VUT"],
+    "Micronesia": ["FSM", "GUM", "KIR", "MHL", "MNP", "NRU", "PLW", "UMI"],
+    "Polynesia": ["ASM", "COK", "NIU", "PCN", "PYF", "TKL", "TON", "TUV", "WLF", "WSM"],
 }
 
 
