@@ -47,9 +47,9 @@ selected_regions = st.multiselect("Regions", regions, default=[
     "Africa",
     "Asia",
     "Europe",
-    # "North America",
+    "Northern America",
     "South America",
-    # "Oceania",
+    "Oceania",
     "World"
 ])
 trend_df = full_df[full_df["Country"].isin(selected_regions)]
