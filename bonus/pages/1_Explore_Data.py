@@ -1,4 +1,7 @@
-import numpy as np
+"""Exploratory data analysis page.
+
+PoU map, trend, correlation heatmap, and scatter plots.
+"""
 import plotly.express as px
 import streamlit as st
 
@@ -11,7 +14,10 @@ df = load_data()
 full_df = load_pou_data()
 regions = sorted(full_df["Country"].unique())
 
-# --- PoU Map ----------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# PoU Map
+# ----------------------------------------------------------------------------------------------------------------------
+
 st.subheader("PoU Map")
 st.markdown("PoU across regions of the world over time.")
 
@@ -39,7 +45,10 @@ fig_map.update_layout(
 fig_map.update_geos(showcountries=True, countrycolor="#DDDDDD", showland=True, landcolor="#F7F7F5")
 st.plotly_chart(fig_map, width="stretch")
 
-# --- PoU Trend --------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# PoU Trend
+# ----------------------------------------------------------------------------------------------------------------------
+
 st.subheader("PoU Trend")
 st.markdown("Prevalence of Undernourishment over time for the selected regions.")
 
@@ -66,10 +75,13 @@ fig_trend = px.line(
 fig_trend.update_layout(legend_title_text="Region")
 st.plotly_chart(fig_trend, width="stretch")
 
-# --- Correlation Heatmap ----------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# Correlation Heatmap
+# ----------------------------------------------------------------------------------------------------------------------
+
 st.subheader("Correlation Heatmap")
 st.markdown("Pearson correlation between each indicator and the Prevalence of Undernourishment.")
-numeric_cols = ["AC", YEAR, *FEATURE_INFO.keys(), TARGET]
+numeric_cols = [AREA_CODE, YEAR, *FEATURE_INFO.keys(), TARGET]
 corr = df[numeric_cols].corr(numeric_only=True)
 
 fig_corr = px.imshow(
@@ -83,7 +95,10 @@ fig_corr = px.imshow(
 fig_corr.update_layout(coloraxis_colorbar_title="r")
 st.plotly_chart(fig_corr, width="stretch")
 
-# --- Scatter Plots of Predictors ---------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# Scatter Plots of Predictors
+# ----------------------------------------------------------------------------------------------------------------------
+
 st.subheader("Predictors vs. PoU")
 st.markdown("Each indicator plotted against Prevalence of Undernourishment, ordered by absolute correlation strength "
             "(strongest first).")
@@ -100,6 +115,6 @@ for row_start in range(0, len(all_features), 3):
             y=TARGET,
             labels={feat: f"{name} ({unit})" if unit else name, TARGET: "PoU (%)"},
             title=f"{name} (r = {sorted_corr[feat]:.2f})",
+            opacity=0.6
         )
-        fig.update_traces(marker=dict(size=6, opacity=0.6))
         col.plotly_chart(fig, width="stretch")

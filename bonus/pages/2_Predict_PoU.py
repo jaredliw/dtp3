@@ -1,3 +1,7 @@
+"""Live prediction page.
+
+Interactively query the trained models for a region/year.
+"""
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -28,6 +32,10 @@ models = load_models()
 regions = region_lookup(df)
 
 left, right = st.columns([1, 2])
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Query
+# ----------------------------------------------------------------------------------------------------------------------
 
 with left:
     st.subheader("Setup")
@@ -66,6 +74,10 @@ with left:
                 min_value=lo, max_value=hi, step=(hi - lo) / 200 or 1.0,
                 key=key, help=desc, disabled=use_actual,
             )
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Prediction Gauge and Historical PoU Line Plot
+# ----------------------------------------------------------------------------------------------------------------------
 
 pred = predict_pou(model_name, area_code, year, indicator_values, models)
 
@@ -122,6 +134,10 @@ with right:
     )
     fig_hist_line.update_yaxes(rangemode="tozero")
     st.plotly_chart(fig_hist_line, width="stretch")
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Linear Regression Coefficients
+# ----------------------------------------------------------------------------------------------------------------------
 
 if model_name == "Linear Regression":
     st.subheader("Linear Regression Coefficients")

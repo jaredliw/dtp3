@@ -1,8 +1,16 @@
+"""Home page.
+
+Introduces the project and summarizes the loaded dataset and predictor variables.
+"""
 import streamlit as st
 
 from library import FEATURE_INFO, load_data, load_models
 
 st.set_page_config(page_title="Food Security | Home", page_icon="\U0001F33E", layout="wide")
+
+# ----------------------------------------------------------------------------------------------------------------------
+# General Description
+# ----------------------------------------------------------------------------------------------------------------------
 
 st.title("\U0001F33E Predicting the Prevalence of Undernourishment")
 st.caption("01.020 Design Thinking Project III — Food Security & Sustainability")
@@ -25,6 +33,10 @@ with st.spinner("Loading data and models..."):
     df = load_data()
     models = load_models()
 
+# ----------------------------------------------------------------------------------------------------------------------
+# Data Metrics
+# ----------------------------------------------------------------------------------------------------------------------
+
 n_regions = df["Country"].nunique()
 year_min, year_max = int(df["YR"].min()), int(df["YR"].max())
 
@@ -32,6 +44,10 @@ col1, col2, col3, col4 = st.columns(4)
 col1.metric("Observations", len(df))
 col2.metric("Regions", n_regions)
 col3.metric("Years Covered", f"{year_min}–{year_max}")
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Variable Table
+# ----------------------------------------------------------------------------------------------------------------------
 
 st.subheader("Predictor variables")
 info_rows = [
