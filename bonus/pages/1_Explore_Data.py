@@ -48,7 +48,7 @@ selected_regions = st.multiselect("Regions", regions, default=[
     "Asia",
     "Europe",
     "Northern America",
-    "South America",
+    "Latin America and the Caribbean",
     "Oceania",
     "World"
 ])
