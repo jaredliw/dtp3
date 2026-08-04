@@ -47,6 +47,8 @@ Run the notebook top to bottom; the last section must be executed at least once 
 
 ## Running the Streamlit app
 
+**Live demo:** https://dtp3-food-security.streamlit.app/
+
 The app loads the cleaned data and pretrained model weights already committed under
 `bonus/data/`, so it does not need to retrain models at startup.
 
